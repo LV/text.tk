@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 // --- HANDLERS ---
@@ -16,7 +18,13 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func textView(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Display a specific text..."))
+	id, err := strconv.Atoi(r.URL.Query().Get("id")) // Extract the value of the id parameter from the query string
+	if err != nil || id <= 0 {
+		http.NotFound(w, r)
+		return
+	}
+
+	fmt.Fprintf(w, "Dislpay a specific text with ID %d...", id) // interpolate id value with response and write to http.ResponseWriter
 }
 
 func textCreate(w http.ResponseWriter, r *http.Request) {
