@@ -1,0 +1,18 @@
+{{define "base"}}
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>{{template "title" .}} - text.tk</title>
+    </head>
+    <body>
+        <header>
+            <h1><a href='/'>text.tk</a></h1>
+        </header>
+        <main>
+            {{template "main" .}}
+        </main>
+        <footer>Created by <a href='https://github.com/lv'>Luis Victoria</a></footer>
+    </body>
+</html>
+{{end}}

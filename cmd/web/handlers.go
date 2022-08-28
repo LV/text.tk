@@ -14,14 +14,19 @@ func home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ts, err := template.ParseFiles("./ui/html/pages/home.tmpl") // Read template file into a template set
+	files := []string{ // initialize slice containing paths to files
+		"./ui/html/base.tmpl", // base template must be the first file in the slice
+		"./ui/html/pages/home.tmpl",
+	}
+
+	ts, err := template.ParseFiles(files...) // Pass slice of file paths as a variadic parameter
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Internal Server Error", 500)
 		return
 	}
 
-	err = ts.Execute(w, nil)
+	err = ts.ExecuteTemplate(w, "base", nil) // use ExecuteTemplate() to write content of the "base" template as the response body
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Internal Server Error", 500)
