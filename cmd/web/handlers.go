@@ -16,6 +16,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 	files := []string{ // initialize slice containing paths to files
 		"./ui/html/base.tmpl", // base template must be the first file in the slice
+		"./ui/html/partials/nav.tmpl",
 		"./ui/html/pages/home.tmpl",
 	}
 
